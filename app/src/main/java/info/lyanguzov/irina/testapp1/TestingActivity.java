@@ -1,15 +1,15 @@
 package info.lyanguzov.irina.testapp1;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class TestingActivity extends AppCompatActivity {
     TextView wordView;
     Button colour1;
     Button colour2;
@@ -24,11 +24,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.count = 50;
+        this.count = 12;
         this.thesaurus = new Thesaurus();
 
         this.wordView = findViewById(R.id.word);
-        replaceWord();
+        replaceTestingWord();
 
 
         this.colour1 = findViewById(R.id.colour1);
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void replaceWord() {
+    private void replaceTestingWord() {
         Word w = this.thesaurus.getRandomTestingWord();
         this.wordView.setText(w.representation);
         int c = getResources().getColor(w.meaning.resource);
@@ -54,14 +54,12 @@ public class MainActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
         this.wordView.startAnimation(animation);
         if (--count == 0) {
-            Intent intent = new Intent(this, ResultActivity.class);
+            Intent intent = new Intent(this, InfoActivity.class);
             startActivity(intent);
         }
     }
 
-
     public void onColorButton(View view) {
-        replaceWord();
+        replaceTestingWord();
     }
-
 }
