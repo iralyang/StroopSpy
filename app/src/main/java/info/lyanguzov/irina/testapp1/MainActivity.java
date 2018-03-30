@@ -9,13 +9,17 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
     TextView wordView;
     Button colour1;
     Button colour2;
     Button colour3;
     Button colour4;
-
+    Random random;
     int count;
 
     Thesaurus thesaurus;
@@ -24,44 +28,53 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.random = new Random();
         this.count = 50;
         this.thesaurus = new Thesaurus();
 
         this.wordView = findViewById(R.id.word);
-        replaceWord();
-
-
         this.colour1 = findViewById(R.id.colour1);
-        this.colour1.setText(R.string.colour_red);
-
         this.colour2 = findViewById(R.id.colour2);
-        this.colour2.setText(R.string.colour_blue);
-
         this.colour3 = findViewById(R.id.colour3);
-        this.colour3.setText(R.string.colour_yellow);
-
         this.colour4 = findViewById(R.id.colour4);
-        this.colour4.setText(R.string.colour_green);
 
+
+        replaceWord();
 
     }
 
+    private void shuffleButtons() {
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(R.string.colour_red);
+        colors.add(R.string.colour_blue);
+        colors.add(R.string.colour_yellow);
+        colors.add(R.string.colour_green);
+        Collections.shuffle(colors, this.random);
+        this.colour1.setText(colors.get(0));
+        this.colour2.setText(colors.get(1));
+        this.colour3.setText(colors.get(2));
+        this.colour4.setText(colors.get(3));
+    }
+
     private void replaceWord() {
-        Word w = this.thesaurus.getRandomTestingWord();
+        this.shuffleButtons();
+        Word w = this.thesaurus.getRandomWord();
         this.wordView.setText(w.representation);
-        int c = getResources().getColor(w.meaning.resource);
+        int c = getResources().getColor(Color.getRandomColor().resource);
         this.wordView.setTextColor(c);
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
         this.wordView.startAnimation(animation);
-        if (--count == 0) {
-            Intent intent = new Intent(this, ResultActivity.class);
-            startActivity(intent);
-        }
     }
 
 
     public void onColorButton(View view) {
-        replaceWord();
+        if (--this.count == 0) {
+            Intent intent = new Intent(this, ResultActivity.class);
+            startActivity(intent);
+        }
+        else {
+            replaceWord();
+        }
     }
 
 }

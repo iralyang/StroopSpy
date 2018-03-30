@@ -11,7 +11,7 @@ class Thesaurus {
     private Random random;
 
     // Constructor
-    public Thesaurus() {
+    Thesaurus() {
         this.random = new Random();
         this.testingWords = new Word[] {
                 new Word(Color.RED, Language.KLINGON, "Doq"),
@@ -79,9 +79,15 @@ class Thesaurus {
         return this.testingWords[n];
     }
 
+    public Word getRandomWord() {
+        int n = this.random.nextInt(this.words.length);
+        return this.words[n];
+    }
+
+
     //method to get array of n random testing words
     public Word[] getRandomTestingWords(int n) {
-        List<Word> result = new ArrayList<Word>();
+        List<Word> result = new ArrayList<>();
         for (int k=0; k<n; ++k) {
             result.add(getRandomTestingWord());
         }
