@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TestApp1</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="button">Button</string>
+    <string name="colour_red">Red</string>
+    <string name="colour_blue">Blue</string>
+    <string name="colour_green">Green</string>
+    <string name="colour_yellow">Yellow</string>
+    <string name="welcome">You will be presented a few words in different languages. Identify the colour of each word and press the sufficient button as soon as you can. After a short testing sequence of words in Klingon, Elvish and Dothraki a real test starts. Do the same as you did in testing sequence and I will try to guess your mother tongue. Enjoy my App!</string>
+    <string name="title_activity_first">FirstActivity</string>
+</resources>
