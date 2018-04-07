@@ -1,8 +1,8 @@
-package info.lyanguzov.irina.testapp1;
+package info.lyanguzov.irina.testapp1.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -13,7 +13,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class TestingActivity extends AppCompatActivity {
+import info.lyanguzov.irina.testapp1.R;
+import info.lyanguzov.irina.testapp1.enums.Color;
+import info.lyanguzov.irina.testapp1.util.MainThesaurus;
+import info.lyanguzov.irina.testapp1.util.Word;
+
+public class MainActivity extends AppCompatActivity {
     TextView wordView;
     Button colour1;
     Button colour2;
@@ -21,26 +26,27 @@ public class TestingActivity extends AppCompatActivity {
     Button colour4;
     Random random;
     int count;
+    final int NUMBER = 50;
 
-    Thesaurus thesaurus;
+    MainThesaurus thesaurus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.random = new Random();
-        this.count = 12;
-        this.thesaurus = new Thesaurus();
+        this.count = NUMBER;
+        this.thesaurus = new MainThesaurus();
 
         this.wordView = findViewById(R.id.word);
-
         this.colour1 = findViewById(R.id.colour1);
         this.colour2 = findViewById(R.id.colour2);
         this.colour3 = findViewById(R.id.colour3);
         this.colour4 = findViewById(R.id.colour4);
 
-        replaceTestingWord();
+        replaceWord();
     }
+
     private void shuffleButtons() {
         ArrayList<Integer> colors = new ArrayList<>();
         colors.add(R.string.colour_red);
@@ -54,23 +60,25 @@ public class TestingActivity extends AppCompatActivity {
         this.colour4.setText(colors.get(3));
     }
 
-    private void replaceTestingWord() {
+    private void replaceWord() {
         this.shuffleButtons();
-        Word w = this.thesaurus.getRandomTestingWord();
-        this.wordView.setText(w.representation);
-        int c = getResources().getColor(w.meaning.resource);
+        Word w = this.thesaurus.getRandomWord();
+        this.wordView.setText(w.getRepresentation());
+        int c = getResources().getColor(Color.getRandomColor().getResource());
         this.wordView.setTextColor(c);
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
         this.wordView.startAnimation(animation);
     }
 
+
     public void onColorButton(View view) {
-        if (--count == 0) {
-            Intent intent = new Intent(this, InfoActivity.class);
+        if (--this.count == 0) {
+            Intent intent = new Intent(this, ResultActivity.class);
             startActivity(intent);
         }
         else {
-            replaceTestingWord();
+            replaceWord();
         }
     }
+
 }

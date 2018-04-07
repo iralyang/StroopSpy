@@ -1,36 +1,18 @@
-package info.lyanguzov.irina.testapp1;
+package info.lyanguzov.irina.testapp1.util;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-class Thesaurus {
-    //Declaring instance variables
-    private Word testingWords[]; //array of words
+import info.lyanguzov.irina.testapp1.enums.Color;
+import info.lyanguzov.irina.testapp1.enums.Language;
+
+public class MainThesaurus {
     private Word words[];
     private Random random;
 
     // Constructor
-    Thesaurus() {
+    public MainThesaurus() {
         this.random = new Random();
-        this.testingWords = new Word[] {
-                new Word(Color.RED, Language.KLINGON, "Doq"),
-                new Word(Color.YELLOW, Language.KLINGON, "SuD 'ej wov"),
-                new Word(Color.BLUE, Language.KLINGON, "SuD"),
-                new Word(Color.GREEN, Language.KLINGON, "SuDqu'"),
-
-                new Word(Color.RED, Language.ELVISH, "Carnë"),
-                new Word(Color.YELLOW, Language.ELVISH, "Malina "),
-                new Word(Color.BLUE, Language.ELVISH, "Luin"),
-                new Word(Color.GREEN, Language.ELVISH, "Laiqua"),
-
-                new Word(Color.RED, Language.DOTHRAKI, "Virzeth"),
-                new Word(Color.YELLOW, Language.DOTHRAKI, "Veltor"),
-                new Word(Color.BLUE, Language.DOTHRAKI, "Thelis"),
-                new Word(Color.GREEN, Language.DOTHRAKI, "Dahaan"),
-        };
-
-        this.words = new Word[] {
+        this.words = new Word[]{
                 new Word(Color.RED, Language.ENGLISH, "Red"),
                 new Word(Color.YELLOW, Language.ENGLISH, "Yellow"),
                 new Word(Color.BLUE, Language.ENGLISH, "Blue"),
@@ -46,10 +28,10 @@ class Thesaurus {
                 new Word(Color.BLUE, Language.PORTUGUESE, "Azul"),
                 new Word(Color.GREEN, Language.PORTUGUESE, "Verde"),
 
-               // new Word(Color.RED, Word.Language.SPANISH, "Rojo"),
-              //  new Word(Color.YELLOW, Word.Language.SPANISH, "Amarillo"),
-              //  new Word(Color.BLUE, Word.Language.SPANISH, "Azul"),
-              //  new Word(Color.GREEN, Word.Language.SPANISH, "Verde"),
+                // new Word(Color.RED, Word.Language.SPANISH, "Rojo"),
+                //  new Word(Color.YELLOW, Word.Language.SPANISH, "Amarillo"),
+                //  new Word(Color.BLUE, Word.Language.SPANISH, "Azul"),
+                //  new Word(Color.GREEN, Word.Language.SPANISH, "Verde"),
 
                 new Word(Color.RED, Language.SINHALA, "රතු"),
                 new Word(Color.YELLOW, Language.SINHALA, "කහ"),
@@ -71,27 +53,16 @@ class Thesaurus {
                 new Word(Color.BLUE, Language.MANDARIN, "蓝色"),
                 new Word(Color.GREEN, Language.MANDARIN, "绿色"),
 
+                new Word(Color.RED, Language.MALAY, "Merah"),
+                new Word(Color.YELLOW, Language.MALAY, "Kuning"),
+                new Word(Color.BLUE, Language.MALAY, "Biru"),
+                new Word(Color.GREEN, Language.MALAY, "Hijau"),
         };
     }
-    // Method to get random testing word
-    public Word getRandomTestingWord() {
-        int n = this.random.nextInt(this.testingWords.length);
-        return this.testingWords[n];
-    }
 
+    // Method to get random word
     public Word getRandomWord() {
         int n = this.random.nextInt(this.words.length);
         return this.words[n];
     }
-
-
-    //method to get array of n random testing words
-    public Word[] getRandomTestingWords(int n) {
-        List<Word> result = new ArrayList<>();
-        for (int k=0; k<n; ++k) {
-            result.add(getRandomTestingWord());
-        }
-        return (Word[]) result.toArray();
-    }
-
 }

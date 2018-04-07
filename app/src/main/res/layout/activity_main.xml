@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <TableLayout
         android:id="@+id/scores"
@@ -31,8 +31,7 @@
                 android:id="@+id/count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="none|numberDecimal" />
+                android:ems="10" />
 
         </TableRow>
 
@@ -50,8 +49,7 @@
             <TextView
                 android:id="@+id/time"
                 android:layout_width="match_parent"
-                android:ems="10"
-                android:inputType="time" />
+                android:ems="10" />
 
         </TableRow>
 
@@ -69,7 +67,6 @@
         android:selectAllOnFocus="false"
         android:singleLine="false"
         android:soundEffectsEnabled="false"
-        android:text="TextView"
         android:textAllCaps="false"
         android:textSize="60sp"
         android:typeface="sans"

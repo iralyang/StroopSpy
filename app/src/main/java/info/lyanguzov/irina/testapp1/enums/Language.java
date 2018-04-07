@@ -1,6 +1,6 @@
-package info.lyanguzov.irina.testapp1;
+package info.lyanguzov.irina.testapp1.enums;
 
-enum Language {
+public enum Language {
     KLINGON(1),
     ELVISH(2),
     DOTHRAKI(3),
@@ -11,7 +11,8 @@ enum Language {
     TAGALOG(7),
     HINDI(8),
     SINHALA(9),
-    MANDARIN(10);
+    MANDARIN(10),
+    MALAY(11);
 
     int value;
     Language(int v) {

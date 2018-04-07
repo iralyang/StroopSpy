@@ -1,7 +1,9 @@
-package info.lyanguzov.irina.testapp1;
+package info.lyanguzov.irina.testapp1.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import info.lyanguzov.irina.testapp1.R;
 
 public class ResultActivity extends AppCompatActivity {
 

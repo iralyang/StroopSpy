@@ -1,13 +1,12 @@
-package info.lyanguzov.irina.testapp1;
+package info.lyanguzov.irina.testapp1.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Process;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import info.lyanguzov.irina.testapp1.R;
 
 public class FirstActivity extends AppCompatActivity {
 

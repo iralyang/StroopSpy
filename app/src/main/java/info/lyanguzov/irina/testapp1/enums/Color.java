@@ -1,8 +1,10 @@
-package info.lyanguzov.irina.testapp1;
+package info.lyanguzov.irina.testapp1.enums;
 
 import java.util.Random;
 
-enum Color {
+import info.lyanguzov.irina.testapp1.R;
+
+public enum Color {
     RED(1, R.color.colorRed),
     YELLOW(2, R.color.colorYellow),
     BLUE(3, R.color.colorBlue),
@@ -25,7 +27,11 @@ enum Color {
     };
     static Random random = new Random();
 
-    static Color getRandomColor() {
+    public static Color getRandomColor() {
         return mapping[random.nextInt(mapping.length)];
+    }
+
+    public int getResource() {
+        return resource;
     }
 }
