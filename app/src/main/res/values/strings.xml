@@ -5,10 +5,13 @@
     <string name="colour_blue">Blue</string>
     <string name="colour_green">Green</string>
     <string name="colour_yellow">Yellow</string>
-    <string name="welcome">You will be presented a few words in different languages. Identify the colour of each word and press the sufficient button as soon as you can. After a short testing sequence of words in Klingon, Elvish and Dothraki a real test starts. Do the same as you did in testing sequence and I will try to guess your mother tongue. Enjoy my App!</string>
+    <string name="welcome">Some authors claim that intelligence services effectively used Stroop test to detect envoys. My App tests how good you are in hiding languages you can read.
+        Your goal would be to identify the colour of the letters each of words presented is written with and press the corresponding button. Try to do it as soon as you can!
+        After a short testing sequence of words in Klingon, Elvish and Dothraki a real test starts. Do the same as you did in testing sequence and I will try to guess your mother tongue. Enjoy my App!
+        <br/>P.S. It is believed that doing Stroop test daily may improve your cognitive abilities. </string>
     <string name="title_activity_first">FirstActivity</string>
     <string name="text_exit">Exit</string>
     <string name="text_next">Next</string>
-    <string name="text_info1">Thank you for reference test. Your average time is %1$.3f seconds.%nYour answers were correct in %2$.1f per cent of times.</string>
-    <string name="text_info2">Would you like to proceed with the StroopSpy test?</string>
+    <string name="text_info1">Thank you for your doing testing sequence. Your average time is %1$.3f seconds.%nYour answers were correct in %2$.1f per cent of times.</string>
+    <string name="text_info2">Now we will try to guess your mother tongue using the famous Stroop test. Would you like to proceed now?</string>
 </resources>

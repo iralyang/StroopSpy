@@ -86,8 +86,10 @@ public class TestingActivity extends AppCompatActivity {
         this.statistics.addTime(t, c == this.color);
         if (--this.counting == 0) {
             Intent intent = new Intent(this, InfoActivity.class);
-            intent.putExtra("EXTRA_AVERAGE_TIME", this.statistics.getAverageTime());
-            intent.putExtra("EXTRA_PERCENTAGE_CORRECT", this.statistics.getCorrectPercentage());
+            Bundle bundle = new Bundle(2);
+            bundle.putFloat("AVERAGE_TIME", this.statistics.getAverageTime());
+            bundle.putFloat("PERCENTAGE_CORRECT", this.statistics.getCorrectPercentage());
+            intent.putExtra("EXTRA_STATISTICS", bundle);
             startActivity(intent);
         }
         else {

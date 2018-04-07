@@ -15,10 +15,10 @@ public class InfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
-        Bundle extras = getIntent().getExtras();
+        Bundle extras = getIntent().getBundleExtra("EXTRA_STATISTICS");
         if (extras != null) {
-            float t = extras.getFloat("EXTRA_AVERAGE_TIME") * 0.001f;
-            float p = extras.getFloat("EXTRA_PERCENTAGE_CORRECT");
+            float t = extras.getFloat("AVERAGE_TIME") * 0.001f;
+            float p = extras.getFloat("PERCENTAGE_CORRECT");
             String text = getString(R.string.text_info1, t, p);
             TextView info = findViewById(R.id.textInfo1);
             info.setText(text);
