@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Process;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,7 +16,7 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
         TextView text = findViewById(R.id.text_welcome);
-        text.setText(Html.fromHtml(getString(R.string.welcome)));
+        text.setText(String.format(getString(R.string.welcome)));
     }
     public void exit(View view) {
         Process.killProcess(Process.myPid());
