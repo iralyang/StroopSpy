@@ -85,32 +85,32 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/colour1"
+            android:id="@+id/color1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="onColorButton" />
+            android:onClick="onButton" />
 
         <Button
-            android:id="@+id/colour2"
+            android:id="@+id/color2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="onColorButton" />
+            android:onClick="onButton" />
 
         <Button
-            android:id="@+id/colour3"
+            android:id="@+id/color3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="onColorButton" />
+            android:onClick="onButton" />
 
         <Button
-            android:id="@+id/colour4"
+            android:id="@+id/color4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="onColorButton" />
+            android:onClick="onButton" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

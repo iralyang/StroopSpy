@@ -1,4 +1,4 @@
-package info.lyanguzov.irina.testapp1;
+package info.lyanguzov.irina.stroopspy;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

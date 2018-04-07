@@ -1,4 +1,4 @@
-package info.lyanguzov.irina.testapp1.enums;
+package info.lyanguzov.irina.stroopspy.enums;
 
 public enum Language {
     KLINGON(1),

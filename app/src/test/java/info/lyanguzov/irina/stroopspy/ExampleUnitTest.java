@@ -1,4 +1,4 @@
-package info.lyanguzov.irina.testapp1;
+package info.lyanguzov.irina.stroopspy;
 
 import org.junit.Test;
 

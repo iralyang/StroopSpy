@@ -1,4 +1,4 @@
-package info.lyanguzov.irina.testapp1.activities;
+package info.lyanguzov.irina.stroopspy.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.os.Process;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import info.lyanguzov.irina.testapp1.R;
+import info.lyanguzov.irina.stroopspy.R;
 
 public class FirstActivity extends AppCompatActivity {
 

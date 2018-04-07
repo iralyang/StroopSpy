@@ -1,7 +1,7 @@
-package info.lyanguzov.irina.testapp1.util;
+package info.lyanguzov.irina.stroopspy.util;
 
-import info.lyanguzov.irina.testapp1.enums.Color;
-import info.lyanguzov.irina.testapp1.enums.Language;
+import info.lyanguzov.irina.stroopspy.enums.Color;
+import info.lyanguzov.irina.stroopspy.enums.Language;
 
 public class Word {
 
