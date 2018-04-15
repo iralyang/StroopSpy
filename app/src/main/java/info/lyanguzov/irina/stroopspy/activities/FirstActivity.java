@@ -22,7 +22,7 @@ public class FirstActivity extends AppCompatActivity {
         Process.killProcess(Process.myPid());
     }
     public void start(View view) {
-        Intent intent = new Intent(this, TestingActivity.class);
+        Intent intent = new Intent(this, ReferenceActivity.class);
         startActivity(intent);
     }
 }

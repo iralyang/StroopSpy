@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Process;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,7 +28,6 @@ public class ResultActivity extends AppCompatActivity {
             String text = getString(R.string.text_result);
             Bundle l = extras.getBundle("EXTRA_LANGUAGES");
             if (l != null) {
-                Log.d("ResultActivity", "Language results:");
                 StringBuilder results = new StringBuilder();
                 for (Language language : Language.getAll()) {
                     String lang = language.getText();
@@ -41,7 +39,6 @@ public class ResultActivity extends AppCompatActivity {
                 String r = results.toString();
                 if (!r.isEmpty()) {
                     text = String.format("%s%n%s", text, r);
-                    Log.d("ResultActivity", r);
                 }
             }
             info.setText(text);
@@ -53,7 +50,7 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     public void repeat(View view) {
-        Intent intent = new Intent(this, TestingActivity.class);
+        Intent intent = new Intent(this, ReferenceActivity.class);
         Bundle bundle = new Bundle(2);
         bundle.putFloat("AVERAGE_TIME", this.testingAverageTime);
         bundle.putFloat("PERCENTAGE_CORRECT", this.testingPercentage);

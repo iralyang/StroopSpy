@@ -16,7 +16,7 @@ public class Word {
     private Language language;
     private String representation;
 
-    Word(Color meaning, Language language, String representation) {
+    public Word(Color meaning, Language language, String representation) {
         this.meaning = meaning;
         this.language = language;
         this.representation = representation;
