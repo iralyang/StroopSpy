@@ -14,5 +14,5 @@
     <string name="text_next">Next</string>
     <string name="text_repeat">Repeat</string>
     <string name="text_info1">Thank you for finishing testing sequence. Your average time is %1$.3f seconds.%nYour answers were correct in %2$.1f per cent of times.%nNow we will try to guess your mother tongue using a famous Stroop test. Would you like to proceed now?</string>
-    <string name="text_info2">Thank you for finishing StroopSpy test. Based on your answers, intelligent services might suspect that you speak X, Y, Z languages. Would you like to do the test again?</string>
+    <string name="text_result">Thank you for finishing StroopSpy test. Based on your answers, intelligent services might suspect that you speak X, Y, Z languages. Would you like to do the test again?</string>
 </resources>

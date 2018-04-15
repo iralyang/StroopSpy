@@ -4,9 +4,12 @@ import info.lyanguzov.irina.stroopspy.enums.Color;
 import info.lyanguzov.irina.stroopspy.enums.Language;
 
 public class Word {
-
     public Color getMeaning() {
         return meaning;
+    }
+    public Language getLanguage() { return language; }
+    public String getRepresentation() {
+        return representation;
     }
 
     private Color meaning;
@@ -17,9 +20,5 @@ public class Word {
         this.meaning = meaning;
         this.language = language;
         this.representation = representation;
-    }
-
-    public String getRepresentation() {
-        return representation;
     }
 }

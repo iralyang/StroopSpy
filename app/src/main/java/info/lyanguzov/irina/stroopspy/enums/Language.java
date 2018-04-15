@@ -1,21 +1,48 @@
 package info.lyanguzov.irina.stroopspy.enums;
 
 public enum Language {
-    KLINGON(1),
-    ELVISH(2),
-    DOTHRAKI(3),
-    ENGLISH(0),
-    RUSSIAN(4),
-    SPANISH(5),
-    PORTUGUESE(6),
-    TAGALOG(7),
-    HINDI(8),
-    SINHALA(9),
-    MANDARIN(10),
-    MALAY(11);
+    KLINGON("Klingon"),
+    ELVISH("Elvish"),
+    DOTHRAKI("Dothraki"),
+    ENGLISH("English"),
+    RUSSIAN("Russian"),
+    SPANISH("Spanish"),
+    PORTUGUESE("Portuguese"),
+    TAGALOG("Tagalog"),
+    HINDI("Hindi"),
+    SINHALA("Sinhala"),
+    MANDARIN("Mandarin"),
+    MALAY("Malay");
 
-    int value;
-    Language(int v) {
-        value = v;
+    static Language all[] = {
+      KLINGON,
+      ELVISH,
+      DOTHRAKI,
+      ENGLISH,
+      RUSSIAN,
+      SPANISH,
+      PORTUGUESE,
+      TAGALOG,
+      HINDI,
+      SINHALA,
+      MANDARIN,
+      MALAY,
+    };
+
+    public String getText() {
+        return text;
+    }
+
+    public static Language[] getAll() {
+        return all;
+    }
+
+    public static int getCount() {
+        return all.length;
+    }
+
+    private String text;
+    Language(String text) {
+        this.text = text;
     }
 }

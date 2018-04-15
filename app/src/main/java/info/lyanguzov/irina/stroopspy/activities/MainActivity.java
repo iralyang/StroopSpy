@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Timer;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private MainThesaurus thesaurus;
     private float testingPercentage;
     private float testingAverageTime;
+    private Dictionary<Language, Integer> languages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
         this.counting = 0;
         this.statistics = new Statistics();
         this.thesaurus = new MainThesaurus();
+        this.languages = new Hashtable<>();
+        for (Language language : Language.getAll()) {
+            this.languages.put(language, 0);
+        }
 
         this.wordView = findViewById(R.id.word);
         this.button_color1 = findViewById(R.id.color1);
@@ -144,10 +151,14 @@ public class MainActivity extends AppCompatActivity {
         updateStatistics(view);
         if (++this.counting == NUMBER) {
             Intent intent = new Intent(this, ResultActivity.class);
-            Bundle bundle = new Bundle(2);
+            Bundle bundle = new Bundle(3);
             bundle.putFloat("AVERAGE_TIME", this.statistics.getAverageTime());
             bundle.putFloat("PERCENTAGE_CORRECT", this.statistics.getCorrectPercentage());
-            intent.putExtra("EXTRA_STATISTICS", bundle);
+            Bundle l = new Bundle(Language.getCount());
+            for (Language language : Language.getAll()) {
+                l.putInt(language.getText(), this.languages.get(language));
+            }
+            bundle.putBundle("EXTRA_LANGUAGES", l);
             intent.putExtra("EXTRA_STATISTICS", bundle);
             startActivity(intent);
         } else {
@@ -160,5 +171,10 @@ public class MainActivity extends AppCompatActivity {
         Color c = (Color) view.getTag();
         boolean correct = c == this.color;
         this.statistics.addTime(t, correct);
+        if (t > this.testingAverageTime * 1.05f) {
+            Integer w = this.languages.get(this.word.getLanguage());
+            ++w;
+            this.languages.put(this.word.getLanguage(), w);
+        }
     }
 }

@@ -7,10 +7,10 @@
     tools:context=".activities.ResultActivity">
 
     <TextView
-        android:id="@+id/textInfo2"
+        android:id="@+id/text_result"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="@string/text_info2"
+        android:text="@string/text_result"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="20sp"
