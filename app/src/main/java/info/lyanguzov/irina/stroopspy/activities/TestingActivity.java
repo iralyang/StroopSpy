@@ -31,6 +31,7 @@ public class TestingActivity extends AppCompatActivity {
     private Button button_color4;
     private TextView textview_count;
     private TextView textview_time;
+    private Animation animation;
     private Random random;
     private int counting;
     private final int NUMBER = 12;
@@ -51,6 +52,7 @@ public class TestingActivity extends AppCompatActivity {
         this.statistics = new Statistics();
         this.thesaurus = new TestingThesaurus();
 
+        this.animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
         this.wordView = findViewById(R.id.word);
 
         this.button_color1 = findViewById(R.id.color1);
@@ -104,8 +106,7 @@ public class TestingActivity extends AppCompatActivity {
         this.wordView.setText(w.getRepresentation());
         this.color = w.getMeaning();
         this.wordView.setTextColor(getResources().getColor(color.getResource()));
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
-        this.wordView.startAnimation(animation);
+        this.wordView.startAnimation(this.animation);
         this.textview_count.setText(String.format(Locale.getDefault(), "%d / %d", counting, NUMBER));
         resetTime();
     }

@@ -25,17 +25,18 @@ import info.lyanguzov.irina.stroopspy.util.*;
 
 public class MainActivity extends AppCompatActivity {
     private TextView wordView;
-    private Button colour1;
-    private Button colour2;
-    private Button colour3;
-    private Button colour4;
+    private Button button_color1;
+    private Button button_color2;
+    private Button button_color3;
+    private Button button_color4;
     private TextView textview_count;
     private TextView textview_time;
     private Random random;
+    private Word word;
+    private Color color;
     private int counting;
     private final int NUMBER = 50;
     private Statistics statistics;
-    private Color color;
     private Handler handler;
     private Timer timer;
     private long startTime;
@@ -59,10 +60,10 @@ public class MainActivity extends AppCompatActivity {
         this.thesaurus = new MainThesaurus();
 
         this.wordView = findViewById(R.id.word);
-        this.colour1 = findViewById(R.id.color1);
-        this.colour2 = findViewById(R.id.color2);
-        this.colour3 = findViewById(R.id.color3);
-        this.colour4 = findViewById(R.id.color4);
+        this.button_color1 = findViewById(R.id.color1);
+        this.button_color2 = findViewById(R.id.color2);
+        this.button_color3 = findViewById(R.id.color3);
+        this.button_color4 = findViewById(R.id.color4);
 
         this.textview_time = findViewById(R.id.textview_time);
         this.textview_count = findViewById(R.id.textview_count);
@@ -88,24 +89,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void shuffleButtons() {
-        ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(R.string.colour_red);
-        colors.add(R.string.colour_blue);
-        colors.add(R.string.colour_yellow);
-        colors.add(R.string.colour_green);
+        ArrayList<Color> colors = new ArrayList<>();
+        colors.add(Color.RED);
+        colors.add(Color.BLUE);
+        colors.add(Color.YELLOW);
+        colors.add(Color.GREEN);
         Collections.shuffle(colors, this.random);
-        this.colour1.setText(colors.get(0));
-        this.colour2.setText(colors.get(1));
-        this.colour3.setText(colors.get(2));
-        this.colour4.setText(colors.get(3));
+        this.button_color1.setText(colors.get(0).getTextResource());
+        this.button_color1.setTag(colors.get(0));
+        this.button_color2.setText(colors.get(1).getTextResource());
+        this.button_color2.setTag(colors.get(1));
+        this.button_color3.setText(colors.get(2).getTextResource());
+        this.button_color3.setTag(colors.get(2));
+        this.button_color4.setText(colors.get(3).getTextResource());
+        this.button_color4.setTag(colors.get(3));
     }
 
     private void replaceWord() {
         this.shuffleButtons();
-        Word w = this.thesaurus.getRandomWord();
-        this.wordView.setText(w.getRepresentation());
-        int c = getResources().getColor(Color.getRandomColor().getResource());
-        this.wordView.setTextColor(c);
+        this.word = this.thesaurus.getRandomWord();
+        this.wordView.setText(this.word.getRepresentation());
+        this.color = Color.getRandomColor();
+        this.wordView.setTextColor(getResources().getColor(this.color.getResource()));
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
         this.wordView.startAnimation(animation);
         this.textview_count.setText(String.format(Locale.getDefault(), "%d / %d", this.counting, NUMBER));
