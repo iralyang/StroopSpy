@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         colors.add(Color.BLUE);
         colors.add(Color.YELLOW);
         colors.add(Color.GREEN);
-        Collections.shuffle(colors, this.random);
+        //Collections.shuffle(colors, this.random);
         this.button_color1.setText(colors.get(0).getTextResource());
         this.button_color1.setTag(colors.get(0));
         this.button_color2.setText(colors.get(1).getTextResource());
@@ -171,10 +171,16 @@ public class MainActivity extends AppCompatActivity {
         Color c = (Color) view.getTag();
         boolean correct = c == this.color;
         this.statistics.addTime(t, correct);
-        if (t > this.testingAverageTime * 1.05f) {
-            Integer w = this.languages.get(this.word.getLanguage());
-            ++w;
-            this.languages.put(this.word.getLanguage(), w);
+        Integer w = this.languages.get(this.word.getLanguage());
+        if (!correct) {
+            w += 1;
         }
+        if (t > this.testingAverageTime * 1.1f) {
+            w += 2;
+        }
+        else if (t > this.testingAverageTime * 1.05f) {
+            w += 1;
+        }
+        this.languages.put(this.word.getLanguage(), w);
     }
 }

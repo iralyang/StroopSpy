@@ -89,7 +89,7 @@ public class TestingActivity extends AppCompatActivity {
         colors.add(Color.BLUE);
         colors.add(Color.YELLOW);
         colors.add(Color.GREEN);
-        Collections.shuffle(colors, this.random);
+        //Collections.shuffle(colors, this.random);
         this.button_color1.setText(colors.get(0).getTextResource());
         this.button_color1.setTag(colors.get(0));
         this.button_color2.setText(colors.get(1).getTextResource());

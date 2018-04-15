@@ -27,7 +27,6 @@ public class ResultActivity extends AppCompatActivity {
             this.testingPercentage = extras.getFloat("PERCENTAGE_CORRECT");
             TextView info = findViewById(R.id.text_result);
             String text = getString(R.string.text_result);
-            info.setText(text);
             Bundle l = extras.getBundle("EXTRA_LANGUAGES");
             if (l != null) {
                 Log.d("ResultActivity", "Language results:");
@@ -39,8 +38,13 @@ public class ResultActivity extends AppCompatActivity {
                         results.append(String.format(Locale.getDefault(), "%s = %d%n", lang, d));
                     }
                 }
-                Log.d("ResultActivity", results.toString());
+                String r = results.toString();
+                if (!r.isEmpty()) {
+                    text = String.format("%s%n%s", text, r);
+                    Log.d("ResultActivity", r);
+                }
             }
+            info.setText(text);
         }
     }
 
