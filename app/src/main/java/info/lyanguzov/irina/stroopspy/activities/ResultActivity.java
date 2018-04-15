@@ -31,12 +31,15 @@ public class ResultActivity extends AppCompatActivity {
             Bundle l = extras.getBundle("EXTRA_LANGUAGES");
             if (l != null) {
                 Log.d("ResultActivity", "Language results:");
+                StringBuilder results = new StringBuilder();
                 for (Language language : Language.getAll()) {
                     String lang = language.getText();
                     int d = l.getInt(lang);
-                    String s = String.format(Locale.getDefault(), "%s = %d", lang, d);
-                    Log.d("ResultActivity", s);
+                    if (d > 0) {
+                        results.append(String.format(Locale.getDefault(), "%s = %d%n", lang, d));
+                    }
                 }
+                Log.d("ResultActivity", results.toString());
             }
         }
     }
