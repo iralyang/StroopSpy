@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import info.lyanguzov.irina.stroopspy.R;
-import info.lyanguzov.irina.stroopspy.enums.*;
 import info.lyanguzov.irina.stroopspy.util.*;
 
 public class ReferenceActivity extends BasicActivity {
@@ -13,12 +12,8 @@ public class ReferenceActivity extends BasicActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initialize(R.layout.activity_reference);
-    }
-
-    @Override
-    protected Thesaurus createThesaurus() {
-        return Thesaurus.createReferenceThesaurus();
+        initialize(R.layout.activity_reference, Thesaurus.createReferenceThesaurus(),
+                new Statistics());
     }
 
     @Override
@@ -34,16 +29,7 @@ public class ReferenceActivity extends BasicActivity {
     @Override
     protected void startNextActivity() {
         Intent intent = new Intent(this, InfoActivity.class);
-        Bundle bundle = new Bundle(2);
-        bundle.putFloat("AVERAGE_TIME", this.statistics.getAverageTime());
-        bundle.putFloat("PERCENTAGE_CORRECT", this.statistics.getCorrectPercentage());
-        intent.putExtra("EXTRA_STATISTICS", bundle);
+        intent.putExtra(Statistics.BUNDLE_NAME, this.getStatistics().getResults());
         startActivity(intent);
-    }
-
-    @Override
-    protected void updateStatistics(Color clickedColor, Color referenceColor, Word word) {
-        long t = System.currentTimeMillis() - this.startTime;
-        this.statistics.addTime(t, clickedColor == referenceColor);
     }
 }

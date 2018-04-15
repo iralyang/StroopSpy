@@ -10,7 +10,8 @@ import android.widget.TextView;
 import java.util.Locale;
 
 import info.lyanguzov.irina.stroopspy.R;
-import info.lyanguzov.irina.stroopspy.enums.Language;
+import info.lyanguzov.irina.stroopspy.enums.*;
+import info.lyanguzov.irina.stroopspy.util.*;
 
 public class ResultActivity extends AppCompatActivity {
     private float testingPercentage;
@@ -20,13 +21,13 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-        Bundle extras = getIntent().getBundleExtra("EXTRA_STATISTICS");
+        Bundle extras = getIntent().getBundleExtra(Statistics.BUNDLE_NAME);
         if (extras != null) {
-            this.testingAverageTime = extras.getFloat("AVERAGE_TIME");
-            this.testingPercentage = extras.getFloat("PERCENTAGE_CORRECT");
+            this.testingAverageTime = extras.getFloat(Statistics.AVERAGE_TIME);
+            this.testingPercentage = extras.getFloat(Statistics.PERCENTAGE_CORRECT);
             TextView info = findViewById(R.id.text_result);
             String text = getString(R.string.text_result);
-            Bundle l = extras.getBundle("EXTRA_LANGUAGES");
+            Bundle l = extras.getBundle(MainStatistics.EXTRA_LANGUAGES);
             if (l != null) {
                 StringBuilder results = new StringBuilder();
                 for (Language language : Language.getAll()) {
@@ -52,9 +53,9 @@ public class ResultActivity extends AppCompatActivity {
     public void repeat(View view) {
         Intent intent = new Intent(this, ReferenceActivity.class);
         Bundle bundle = new Bundle(2);
-        bundle.putFloat("AVERAGE_TIME", this.testingAverageTime);
-        bundle.putFloat("PERCENTAGE_CORRECT", this.testingPercentage);
-        intent.putExtra("EXTRA_STATISTICS", bundle);
+        bundle.putFloat(Statistics.AVERAGE_TIME, this.testingAverageTime);
+        bundle.putFloat(Statistics.PERCENTAGE_CORRECT, this.testingPercentage);
+        intent.putExtra(Statistics.BUNDLE_NAME, bundle);
         startActivity(intent);
     }
 }

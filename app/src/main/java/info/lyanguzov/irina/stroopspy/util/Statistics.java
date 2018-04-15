@@ -1,6 +1,13 @@
 package info.lyanguzov.irina.stroopspy.util;
 
+import android.os.Bundle;
+
+import info.lyanguzov.irina.stroopspy.enums.Color;
+
 public class Statistics {
+    public static final String BUNDLE_NAME = "EXTRA_STATISTICS";
+    public static final String AVERAGE_TIME = "AVERAGE_TIME";
+    public static final String PERCENTAGE_CORRECT = "PERCENTAGE_CORRECT";
     private float averageTime;
     private int count;
     private int correctCount;
@@ -15,18 +22,25 @@ public class Statistics {
         correctCount = 0;
     }
 
-    public void addTime(long time, boolean correct) {
+    public void update(long time, Color clickedColor, Color referenceColor, Word word) {
         ++count;
-        if (correct) {
+        if (clickedColor == referenceColor) {
             averageTime += (time - averageTime) / ++correctCount;
         }
     }
 
-    public float getCorrectPercentage() {
+    private float getCorrectPercentage() {
         return 100.0f * correctCount / count;
     }
 
-    public float getAverageTime() {
+    private float getAverageTime() {
         return averageTime;
+    }
+
+    public Bundle getResults() {
+        Bundle results = new Bundle(2);
+        results.putFloat(AVERAGE_TIME, getAverageTime());
+        results.putFloat(PERCENTAGE_CORRECT, getCorrectPercentage());
+        return results;
     }
 }

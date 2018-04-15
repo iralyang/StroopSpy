@@ -21,31 +21,29 @@ import info.lyanguzov.irina.stroopspy.enums.Color;
 import info.lyanguzov.irina.stroopspy.util.*;
 
 abstract class BasicActivity extends AppCompatActivity {
-    protected TextView wordView;
-    protected TextView textview_time;
-    protected TextView textview_count;
-    protected Button button_color1;
-    protected Button button_color2;
-    protected Button button_color3;
-    protected Button button_color4;
-    protected Animation animation;
-    protected long startTime;
+    private TextView wordView;
+    private TextView textview_time;
+    private TextView textview_count;
+    private Button button_color1;
+    private Button button_color2;
+    private Button button_color3;
+    private Button button_color4;
+    private Animation animation;
+    private long startTime;
     private Handler handler;
     private Timer timer;
-    protected Random random;
     private Thesaurus thesaurus;
-    private Word word;
     private Color color;
-    protected int count;
-    protected Statistics statistics;
+    private Word word;
+    private int count;
+    private Statistics statistics;
 
-    protected void initialize(int contentView) {
+    protected void initialize(int contentView, Thesaurus thesaurus, Statistics statistics) {
         setContentView(contentView);
         setupTimer();
-        this.random = new Random();
-        this.thesaurus = createThesaurus();
+        this.thesaurus = thesaurus;
         this.count = 0;
-        this.statistics = new Statistics();
+        this.statistics = statistics;
         this.wordView = findViewById(R.id.word);
         this.textview_time = findViewById(R.id.textview_time);
         this.textview_count = findViewById(R.id.textview_count);
@@ -57,9 +55,16 @@ abstract class BasicActivity extends AppCompatActivity {
         replaceWord();
     }
 
-    protected abstract Thesaurus createThesaurus();
-
     protected abstract int getMaxCount();
+    protected abstract void updateColor();
+
+    protected Color getColor() {
+        return color;
+    }
+
+    protected void setColor(Color color) {
+        this.color = color;
+    }
 
     private void updateWord() {
         this.word = this.thesaurus.getRandomWord();
@@ -69,14 +74,8 @@ abstract class BasicActivity extends AppCompatActivity {
         return word;
     }
 
-    protected abstract void updateColor();
-
-    protected Color getColor() {
-        return color;
-    }
-
-    protected void setColor(Color color) {
-        this.color = color;
+    protected Statistics getStatistics() {
+        return statistics;
     }
 
     // to set up timer thread
@@ -145,12 +144,14 @@ abstract class BasicActivity extends AppCompatActivity {
         this.wordView.setText(this.word.getRepresentation());
         this.wordView.setTextColor(getResources().getColor(this.color.getResource()));
         this.wordView.startAnimation(this.animation);
-        this.textview_count.setText(String.format(Locale.getDefault(), "%d / %d", this.count, getMaxCount()));
+        this.textview_count.setText(String.format(Locale.getDefault(), "%d / %d",
+                this.count, getMaxCount()));
     }
 
     public void onButton(View view) {
         Color c = (Color) view.getTag();
-        updateStatistics(c, this.color, this.word);
+        long time = System.currentTimeMillis() - this.startTime;
+        this.statistics.update(time, c, this.color, this.word);
         if (++this.count == getMaxCount()) {
             startNextActivity();
         } else {
@@ -159,6 +160,4 @@ abstract class BasicActivity extends AppCompatActivity {
     }
 
     protected abstract void startNextActivity();
-
-    protected abstract void updateStatistics(Color clickedColor, Color referenceColor, Word word);
 }
