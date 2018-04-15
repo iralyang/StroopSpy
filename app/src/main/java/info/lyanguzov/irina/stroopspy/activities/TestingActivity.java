@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,7 +25,6 @@ import info.lyanguzov.irina.stroopspy.util.*;
 
 public class TestingActivity extends AppCompatActivity {
     private TextView wordView;
-    private TextView count;
     private Button button_color1;
     private Button button_color2;
     private Button button_color3;
@@ -39,9 +39,7 @@ public class TestingActivity extends AppCompatActivity {
     private Handler handler;
     private Timer timer;
     private long startTime;
-
-    TestingThesaurus thesaurus;
-
+    private TestingThesaurus thesaurus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,21 +59,20 @@ public class TestingActivity extends AppCompatActivity {
         this.button_color4 = findViewById(R.id.color4);
 
         this.textview_time = findViewById(R.id.textview_time);
-        this.timer = new Timer(true);
-
         this.textview_count = findViewById(R.id.textview_count);
         replaceTestingWord();
     }
+
     // to set up timer thread
     private void setupTimer() {
-        handler = new Handler(Looper.getMainLooper()) {
+        this.handler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message message) {
                 updateTime();
             }
         };
-        timer = new Timer("TESTING_TIMER", true);
-        timer.scheduleAtFixedRate(new TimerTask() {
+        this.timer = new Timer("TESTING_TIMER", true);
+        this.timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 Message message = handler.obtainMessage(1);
@@ -109,7 +106,7 @@ public class TestingActivity extends AppCompatActivity {
         this.wordView.setTextColor(getResources().getColor(color.getResource()));
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
         this.wordView.startAnimation(animation);
-        this.textview_count.setText(String.format("%d / %d", counting, NUMBER));
+        this.textview_count.setText(String.format(Locale.getDefault(), "%d / %d", counting, NUMBER));
         resetTime();
     }
 
@@ -117,10 +114,11 @@ public class TestingActivity extends AppCompatActivity {
         long msec = time % 1000;
         long sec = (time / 1000) % 60;
         long min = time / 60000;
-        textview_time.setText(String.format("%d:%d.%02d", min, sec, msec / 10));
+        this.textview_time.setText(String.format(Locale.getDefault(), "%d:%d.%02d", min, sec, msec / 10));
     }
-// to synchronise threads
+
     private void resetTime() {
+        // to synchronise threads
         synchronized (this) {
             startTime = System.currentTimeMillis();
             showTime(0);
@@ -128,15 +126,16 @@ public class TestingActivity extends AppCompatActivity {
     }
 
     private void updateTime() {
+        // to synchronise threads
         synchronized (this) {
-            long time = System.currentTimeMillis() - startTime;
+            long time = System.currentTimeMillis() - this.startTime;
             showTime(time);
         }
     }
 
     public void onButton(View view) {
         long t = System.currentTimeMillis() - this.startTime;
-        Color c = (Color)view.getTag();
+        Color c = (Color) view.getTag();
         this.statistics.addTime(t, c == this.color);
         if (++this.counting == NUMBER) {
             Intent intent = new Intent(this, InfoActivity.class);
@@ -145,10 +144,8 @@ public class TestingActivity extends AppCompatActivity {
             bundle.putFloat("PERCENTAGE_CORRECT", this.statistics.getCorrectPercentage());
             intent.putExtra("EXTRA_STATISTICS", bundle);
             startActivity(intent);
-        }
-        else {
+        } else {
             replaceTestingWord();
         }
     }
-
 }
