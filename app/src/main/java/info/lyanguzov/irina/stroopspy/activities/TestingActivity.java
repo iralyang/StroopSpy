@@ -1,6 +1,9 @@
 package info.lyanguzov.irina.stroopspy.activities;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Timer;
+import java.util.TimerTask;
 
 import info.lyanguzov.irina.stroopspy.R;
 import info.lyanguzov.irina.stroopspy.enums.Color;
@@ -21,7 +25,6 @@ import info.lyanguzov.irina.stroopspy.util.*;
 public class TestingActivity extends AppCompatActivity {
     private TextView wordView;
     private TextView count;
-    private long time;
     private Button button_color1;
     private Button button_color2;
     private Button button_color3;
@@ -33,7 +36,9 @@ public class TestingActivity extends AppCompatActivity {
     private final int NUMBER = 12;
     private Statistics statistics;
     private Color color;
+    private Handler handler;
     private Timer timer;
+    private long startTime;
 
     TestingThesaurus thesaurus;
 
@@ -42,6 +47,7 @@ public class TestingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing);
+        setupTimer();
         this.random = new Random();
         this.counting = 0;
         this.statistics = new Statistics();
@@ -60,6 +66,24 @@ public class TestingActivity extends AppCompatActivity {
         this.textview_count = findViewById(R.id.textview_count);
         replaceTestingWord();
     }
+    // to set up timer thread
+    private void setupTimer() {
+        handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message message) {
+                updateTime();
+            }
+        };
+        timer = new Timer("TESTING_TIMER", true);
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Message message = handler.obtainMessage(1);
+                message.sendToTarget();
+            }
+        }, 0, 10);
+    }
+
     private void shuffleButtons() {
         ArrayList<Color> colors = new ArrayList<>();
         colors.add(Color.RED);
@@ -79,7 +103,6 @@ public class TestingActivity extends AppCompatActivity {
 
     private void replaceTestingWord() {
         this.shuffleButtons();
-        this.time = System.currentTimeMillis();
         Word w = this.thesaurus.getRandomWord();
         this.wordView.setText(w.getRepresentation());
         this.color = w.getMeaning();
@@ -87,11 +110,32 @@ public class TestingActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
         this.wordView.startAnimation(animation);
         this.textview_count.setText(String.format("%d / %d", counting, NUMBER));
-        this.textview_time.setText(String.format("%d:%d.%03d", 0, 0, 0));
+        resetTime();
+    }
+
+    private void showTime(long time) {
+        long msec = time % 1000;
+        long sec = (time / 1000) % 60;
+        long min = time / 60000;
+        textview_time.setText(String.format("%d:%d.%02d", min, sec, msec / 10));
+    }
+// to synchronise threads
+    private void resetTime() {
+        synchronized (this) {
+            startTime = System.currentTimeMillis();
+            showTime(0);
+        }
+    }
+
+    private void updateTime() {
+        synchronized (this) {
+            long time = System.currentTimeMillis() - startTime;
+            showTime(time);
+        }
     }
 
     public void onButton(View view) {
-        long t = System.currentTimeMillis() - this.time;
+        long t = System.currentTimeMillis() - this.startTime;
         Color c = (Color)view.getTag();
         this.statistics.addTime(t, c == this.color);
         if (++this.counting == NUMBER) {
