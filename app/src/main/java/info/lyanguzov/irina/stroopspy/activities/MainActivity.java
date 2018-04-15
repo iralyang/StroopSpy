@@ -12,30 +12,48 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.util.Timer;
 
 import info.lyanguzov.irina.stroopspy.R;
 import info.lyanguzov.irina.stroopspy.enums.Color;
-import info.lyanguzov.irina.stroopspy.util.MainThesaurus;
-import info.lyanguzov.irina.stroopspy.util.Word;
+import info.lyanguzov.irina.stroopspy.util.*;
 
 public class MainActivity extends AppCompatActivity {
-    TextView wordView;
-    Button colour1;
-    Button colour2;
-    Button colour3;
-    Button colour4;
-    Random random;
-    int count;
+    private TextView wordView;
+    private TextView count;
+    private long time;
+    private Button colour1;
+    private Button colour2;
+    private Button colour3;
+    private Button colour4;
+    private TextView textview_count;
+    private TextView textview_time;
+    private Random random;
+    int counting;
     final int NUMBER = 50;
+    private Statistics statistics;
+    private Color color;
+    private Timer timer;
 
     MainThesaurus thesaurus;
+
+    private float testingPercentage;
+    private float testingAverageTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Bundle extras = getIntent().getBundleExtra("EXTRA_STATISTICS");
+        if (extras != null) {
+            testingAverageTime = extras.getFloat("AVERAGE_TIME");
+            testingPercentage = extras.getFloat("PERCENTAGE_CORRECT");
+        }
+
         this.random = new Random();
-        this.count = NUMBER;
+        this.counting = 0;
+        this.statistics = new Statistics();
         this.thesaurus = new MainThesaurus();
 
         this.wordView = findViewById(R.id.word);
@@ -44,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
         this.colour3 = findViewById(R.id.color3);
         this.colour4 = findViewById(R.id.color4);
 
+        this.textview_time = findViewById(R.id.textview_time);
+        this.timer = new Timer(true);
+
+        this.textview_count = findViewById(R.id.textview_count);
         replaceWord();
     }
 
@@ -68,15 +90,26 @@ public class MainActivity extends AppCompatActivity {
         this.wordView.setTextColor(c);
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
         this.wordView.startAnimation(animation);
+        this.textview_count.setText(String.format("%d / %d", counting, NUMBER));
+        this.textview_time.setText(String.format("%d:%d.%03d", 0, 0, 0));
     }
 
 
-    public void onColorButton(View view) {
-        if (--this.count == 0) {
+    public void onButton(View view) {
+        long t = System.currentTimeMillis() - this.time;
+        Color c = (Color) view.getTag();
+        this.statistics.addTime(t, c == this.color);
+
+
+        if (++this.counting == NUMBER) {
             Intent intent = new Intent(this, ResultActivity.class);
+            Bundle bundle = new Bundle(2);
+            bundle.putFloat("AVERAGE_TIME", this.statistics.getAverageTime());
+            bundle.putFloat("PERCENTAGE_CORRECT", this.statistics.getCorrectPercentage());
+            intent.putExtra("EXTRA_STATISTICS", bundle);
+            intent.putExtra("EXTRA_STATISTICS", bundle);
             startActivity(intent);
-        }
-        else {
+        } else {
             replaceWord();
         }
     }

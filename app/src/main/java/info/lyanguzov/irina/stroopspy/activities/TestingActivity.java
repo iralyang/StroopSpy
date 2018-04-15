@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.util.Timer;
 
 import info.lyanguzov.irina.stroopspy.R;
 import info.lyanguzov.irina.stroopspy.enums.Color;
@@ -25,11 +26,14 @@ public class TestingActivity extends AppCompatActivity {
     private Button button_color2;
     private Button button_color3;
     private Button button_color4;
+    private TextView textview_count;
+    private TextView textview_time;
     private Random random;
     private int counting;
     private final int NUMBER = 12;
     private Statistics statistics;
     private Color color;
+    private Timer timer;
 
     TestingThesaurus thesaurus;
 
@@ -39,7 +43,7 @@ public class TestingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing);
         this.random = new Random();
-        this.counting = NUMBER;
+        this.counting = 0;
         this.statistics = new Statistics();
         this.thesaurus = new TestingThesaurus();
 
@@ -50,6 +54,10 @@ public class TestingActivity extends AppCompatActivity {
         this.button_color3 = findViewById(R.id.color3);
         this.button_color4 = findViewById(R.id.color4);
 
+        this.textview_time = findViewById(R.id.textview_time);
+        this.timer = new Timer(true);
+
+        this.textview_count = findViewById(R.id.textview_count);
         replaceTestingWord();
     }
     private void shuffleButtons() {
@@ -78,13 +86,15 @@ public class TestingActivity extends AppCompatActivity {
         this.wordView.setTextColor(getResources().getColor(color.getResource()));
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
         this.wordView.startAnimation(animation);
+        this.textview_count.setText(String.format("%d / %d", counting, NUMBER));
+        this.textview_time.setText(String.format("%d:%d.%03d", 0, 0, 0));
     }
 
     public void onButton(View view) {
         long t = System.currentTimeMillis() - this.time;
         Color c = (Color)view.getTag();
         this.statistics.addTime(t, c == this.color);
-        if (--this.counting == 0) {
+        if (++this.counting == NUMBER) {
             Intent intent = new Intent(this, InfoActivity.class);
             Bundle bundle = new Bundle(2);
             bundle.putFloat("AVERAGE_TIME", this.statistics.getAverageTime());
@@ -96,4 +106,5 @@ public class TestingActivity extends AppCompatActivity {
             replaceTestingWord();
         }
     }
+
 }

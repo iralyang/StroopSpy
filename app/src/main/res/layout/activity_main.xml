@@ -21,14 +21,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Count:"
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/count"
+                android:id="@+id/textview_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10" />
@@ -40,14 +39,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Time:"
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/textview_time"
                 android:layout_width="match_parent"
                 android:ems="10" />
 
