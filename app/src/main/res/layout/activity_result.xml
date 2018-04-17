@@ -15,7 +15,7 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/info_buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
