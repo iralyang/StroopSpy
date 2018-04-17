@@ -9,8 +9,8 @@ import info.lyanguzov.irina.stroopspy.enums.*;
 
 public class MainStatistics extends Statistics {
     public static final String EXTRA_LANGUAGES = "EXTRA_LANGUAGES";
-    private float testingPercentage;
-    private float testingAverageTime;
+    private float referencingPercentage;
+    private float referencingAverageTime;
     private Dictionary<Language, Integer> languages;
 
     private MainStatistics() {
@@ -23,11 +23,12 @@ public class MainStatistics extends Statistics {
 
     public MainStatistics(Bundle bundle) {
         this();
-        testingPercentage = 100.0f;
-        testingAverageTime = 1.0f;
+        //setting referencing data as 100%
+        referencingPercentage = 100.0f;
+        referencingAverageTime = 1.0f;
         if (bundle != null) {
-            testingAverageTime = bundle.getFloat(AVERAGE_TIME);
-            testingPercentage = bundle.getFloat(PERCENTAGE_CORRECT);
+            referencingAverageTime = bundle.getFloat(AVERAGE_TIME);
+            referencingPercentage = bundle.getFloat(PERCENTAGE_CORRECT);
         }
     }
 
@@ -35,12 +36,14 @@ public class MainStatistics extends Statistics {
     public void update(long time, Color clickedColor, Color referenceColor, Word word) {
         super.update(time, clickedColor, referenceColor, word);
         Integer w = this.languages.get(word.getLanguage());
+        // adds 1 point for wrong click
         if (clickedColor != referenceColor) {
             w += 1;
         }
-        if (time > this.testingAverageTime * 1.1f) {
+        // adds 1 point for 5% extra time and 2 points for 10% extra time used per word
+        if (time > this.referencingAverageTime * 1.1f) {
             w += 2;
-        } else if (time > this.testingAverageTime * 1.05f) {
+        } else if (time > this.referencingAverageTime * 1.05f) {
             w += 1;
         }
         this.languages.put(word.getLanguage(), w);
