@@ -31,6 +31,7 @@ public class ResultActivity extends AppCompatActivity {
             this.language = language;
         }
 
+        // to help sorting languages in decending order
         @Override
         public int compareTo(@NonNull LanguageStat o) {
             if (count < o.count)
@@ -72,10 +73,10 @@ public class ResultActivity extends AppCompatActivity {
                     languageText += resultList.get(0).language;
                 }
                 if (resultList.size() > 1) {
-                    languageText += "," + resultList.get(1).language;
+                    languageText += ", " + resultList.get(1).language;
                 }
                 if (resultList.size() > 2) {
-                    languageText += "," + resultList.get(2).language;
+                    languageText += ", " + resultList.get(2).language;
                 }
             }
             if (languageText.isEmpty()) {
