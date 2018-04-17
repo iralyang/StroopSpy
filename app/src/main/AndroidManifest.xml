@@ -21,7 +21,7 @@
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.InfoActivity" />
         <activity android:name=".activities.ReferenceActivity" />
-        <activity android:name=".activities.ResultActivity"></activity>
+        <activity android:name=".activities.ResultActivity" />
     </application>
 
 </manifest>
