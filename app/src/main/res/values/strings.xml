@@ -10,11 +10,17 @@
         You are about to do a reference test based on fictional languages before completing the actual test</string>
     <string name="title_activity_first">FirstActivity</string>
     <string name="text_exit">Exit</string>
+    <string name="text_start">Start</string>
     <string name="text_next">Next</string>
     <string name="text_repeat">Repeat</string>
+    <string name="text_count">Count:</string>
+    <string name="text_time">Time:</string>
     <string name="text_info1">Thank you for finishing referencing sequence. Your average time is %1$.3f seconds.%nYour answers were correct in %2$.1f per cent of times.%n
         %n
         Now do the test again and we will try to guess the languages you can read.</string>
+    <string name="text_result_no_spy">Thank you for finishing the test. Based on your answers, intelligent services can&apos;t suspect you.%n
+        %n
+        Would you like to do the test again?</string>
     <string name="text_result">Thank you for finishing the test. Based on your answers, intelligent services might suspect that you speak at least %s.%n
         %n
         Would you like to do the test again?</string>

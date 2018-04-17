@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Process;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import info.lyanguzov.irina.stroopspy.enums.*;
 import info.lyanguzov.irina.stroopspy.util.*;
 
 public class ResultActivity extends AppCompatActivity {
+    private static final boolean DEBUG = false;
     private float testingPercentage;
     private float testingAverageTime;
 
@@ -49,7 +51,7 @@ public class ResultActivity extends AppCompatActivity {
             this.testingPercentage = extras.getFloat(Statistics.PERCENTAGE_CORRECT);
             TextView info = findViewById(R.id.text_result);
             String text = getString(R.string.text_result);
-            String languageText = "None";
+            String languageText = "";
             ArrayList<LanguageStat> resultList = new ArrayList<>();
             Bundle l = extras.getBundle(MainStatistics.EXTRA_LANGUAGES);
             if (l != null) {
@@ -58,20 +60,30 @@ public class ResultActivity extends AppCompatActivity {
                     int d = l.getInt(lang);
                     if (d > 0) {
                         resultList.add(new LanguageStat(d, lang));
+                        if (DEBUG) {
+                            String s = String.format(Locale.getDefault(), "%s = %d%n", lang, d);
+                            languageText += s;
+                            Log.d("ResultActivity", s);
+                        }
                     }
                 }
                 Collections.sort(resultList);
-                if (resultList.size() >= 1) {
-                    languageText = resultList.get(0).language;
+                if (resultList.size() > 0) {
+                    languageText += resultList.get(0).language;
                 }
-                if (resultList.size() >= 2) {
+                if (resultList.size() > 1) {
                     languageText += "," + resultList.get(1).language;
                 }
-                if (resultList.size() >= 3) {
+                if (resultList.size() > 2) {
                     languageText += "," + resultList.get(2).language;
                 }
             }
-            info.setText(String.format(text, languageText));
+            if (languageText.isEmpty()) {
+                info.setText(getString(R.string.text_result_no_spy));
+            }
+            else {
+                info.setText(getString(R.string.text_result, languageText));
+            }
         }
     }
 
