@@ -12,7 +12,12 @@ public enum Language {
     HINDI("Hindi"),
     SINHALA("Sinhala"),
     MANDARIN("Mandarin"),
-    MALAY("Malay");
+    MALAY("Malay"),
+    GERMAN("German"),
+    FRENCH("French"),
+    HEBREW("Hebrew"),
+    ARABIC("Arabic"),
+    FARSI("Farsi");
 
     static Language all[] = {
       KLINGON,
@@ -27,6 +32,11 @@ public enum Language {
       SINHALA,
       MANDARIN,
       MALAY,
+      GERMAN,
+      FRENCH,
+      HEBREW,
+      ARABIC,
+      FARSI,
     };
 
     public String getText() {
