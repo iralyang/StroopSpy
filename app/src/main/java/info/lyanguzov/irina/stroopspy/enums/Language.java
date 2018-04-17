@@ -1,5 +1,6 @@
 package info.lyanguzov.irina.stroopspy.enums;
 
+@SuppressWarnings("SpellCheckingInspection")
 public enum Language {
     KLINGON("Klingon"),
     ELVISH("Elvish"),
@@ -19,7 +20,7 @@ public enum Language {
     ARABIC("Arabic"),
     FARSI("Farsi");
 
-    static Language all[] = {
+    static final Language[] all = {
       KLINGON,
       ELVISH,
       DOTHRAKI,
@@ -51,7 +52,7 @@ public enum Language {
         return all.length;
     }
 
-    private String text;
+    private final String text;
     Language(String text) {
         this.text = text;
     }

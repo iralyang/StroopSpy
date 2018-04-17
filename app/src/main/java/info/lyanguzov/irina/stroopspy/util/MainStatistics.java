@@ -11,10 +11,13 @@ public class MainStatistics extends Statistics {
     public static final String EXTRA_LANGUAGES = "EXTRA_LANGUAGES";
     private float referencingPercentage;
     private float referencingAverageTime;
-    private Dictionary<Language, Integer> languages;
+    private final Dictionary<Language, Integer> languages;
 
     private MainStatistics() {
         super();
+        //setting referencing data as 100%
+        this.referencingPercentage = 100.0f;
+        this.referencingAverageTime = 1.0f;
         this.languages = new Hashtable<>();
         for (Language language : Language.getAll()) {
             this.languages.put(language, 0);
@@ -23,12 +26,9 @@ public class MainStatistics extends Statistics {
 
     public MainStatistics(Bundle bundle) {
         this();
-        //setting referencing data as 100%
-        referencingPercentage = 100.0f;
-        referencingAverageTime = 1.0f;
         if (bundle != null) {
-            referencingAverageTime = bundle.getFloat(AVERAGE_TIME);
-            referencingPercentage = bundle.getFloat(PERCENTAGE_CORRECT);
+            this.referencingPercentage = bundle.getFloat(PERCENTAGE_CORRECT);
+            this.referencingAverageTime = bundle.getFloat(AVERAGE_TIME);
         }
     }
 

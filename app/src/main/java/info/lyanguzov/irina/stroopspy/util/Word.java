@@ -12,9 +12,9 @@ public class Word {
         return representation;
     }
 
-    private Color meaning;
-    private Language language;
-    private String representation;
+    private final Color meaning;
+    private final Language language;
+    private final String representation;
 
     public Word(Color meaning, Language language, String representation) {
         this.meaning = meaning;

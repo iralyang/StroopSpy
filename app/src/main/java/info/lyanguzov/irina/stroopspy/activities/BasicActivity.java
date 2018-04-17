@@ -96,6 +96,7 @@ abstract class BasicActivity extends AppCompatActivity {
     }
 
     private void showTime(long time) {
+        //noinspection SpellCheckingInspection
         long msec = time % 1000;
         long sec = (time / 1000) % 60;
         long min = time / 60000;

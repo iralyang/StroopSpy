@@ -4,10 +4,11 @@ import java.util.Random;
 
 import info.lyanguzov.irina.stroopspy.enums.*;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class Thesaurus {
-    private Word words[];
-    private Random random;
-    private static Word referenceWords[] = new Word[]{
+    private final Word[] words;
+    private final Random random;
+    private static final Word[] referenceWords = new Word[]{
             new Word(Color.RED, Language.KLINGON, "Doq"),
             new Word(Color.YELLOW, Language.KLINGON, "SuD 'ej wov"),
             new Word(Color.BLUE, Language.KLINGON, "SuD"),
@@ -23,7 +24,7 @@ public class Thesaurus {
             new Word(Color.BLUE, Language.DOTHRAKI, "Thelis"),
             new Word(Color.GREEN, Language.DOTHRAKI, "Dahaan"),
     };
-    private static Word mainWords[] = new Word[]{
+    private static final Word[] mainWords = new Word[]{
             new Word(Color.RED, Language.ENGLISH, "Red"),
             new Word(Color.YELLOW, Language.ENGLISH, "Yellow"),
             new Word(Color.BLUE, Language.ENGLISH, "Blue"),

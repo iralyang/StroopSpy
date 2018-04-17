@@ -19,13 +19,13 @@ public enum Color {
     }
 
     //array of all my colours
-    static Color mapping[] = {
+    static final Color[] mapping = {
             RED,
             YELLOW,
             BLUE,
             GREEN,
     };
-    static Random random = new Random();
+    static final Random random = new Random();
 
     public static Color getRandomColor() {
         return mapping[random.nextInt(mapping.length)];
