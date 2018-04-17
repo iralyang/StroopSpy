@@ -45,10 +45,10 @@ public class Thesaurus {
             // new Word(Color.BLUE, Word.Language.SPANISH, "Azul"),
             // new Word(Color.GREEN, Word.Language.SPANISH, "Verde"),
 
-            new Word(Color.RED, Language.SINHALA, "රතු"),
-            new Word(Color.YELLOW, Language.SINHALA, "කහ"),
-            new Word(Color.BLUE, Language.SINHALA, "නිල්"),
-            new Word(Color.GREEN, Language.SINHALA, "කොළ"),
+            // new Word(Color.RED, Language.SINHALA, "රතු"),
+            // new Word(Color.YELLOW, Language.SINHALA, "කහ"),
+            // new Word(Color.BLUE, Language.SINHALA, "නිල්"),
+            // new Word(Color.GREEN, Language.SINHALA, "කොළ"),
 
             new Word(Color.RED, Language.TAGALOG, "Pula"),
             new Word(Color.YELLOW, Language.TAGALOG, "Dilaw"),
