@@ -15,7 +15,7 @@
     <string name="text_info1">Thank you for finishing referencing sequence. Your average time is %1$.3f seconds.%nYour answers were correct in %2$.1f per cent of times.%n
         %n
         Now do the test again and we will try to guess the languages you can read.</string>
-    <string name="text_result">Thank you for finishing the test. Based on your answers, intelligent services might suspect that you speak at least X, Y, Z.%n
+    <string name="text_result">Thank you for finishing the test. Based on your answers, intelligent services might suspect that you speak at least %s.%n
         %n
         Would you like to do the test again?</string>
 </resources>
