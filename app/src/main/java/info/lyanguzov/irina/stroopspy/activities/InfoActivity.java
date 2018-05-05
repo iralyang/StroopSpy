@@ -39,6 +39,7 @@ public class InfoActivity extends AppCompatActivity {
         bundle.putFloat(Statistics.AVERAGE_TIME, averageTime);
         bundle.putFloat(Statistics.PERCENTAGE_CORRECT, percentage);
         intent.putExtra(Statistics.BUNDLE_NAME, bundle);
+        finish();
         startActivity(intent);
     }
 }

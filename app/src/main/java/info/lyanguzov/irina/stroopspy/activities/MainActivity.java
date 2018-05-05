@@ -31,6 +31,7 @@ public class MainActivity extends BasicActivity {
     protected void startNextActivity() {
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra(Statistics.BUNDLE_NAME, this.getStatistics().getResults());
+        finish();
         startActivity(intent);
     }
 }

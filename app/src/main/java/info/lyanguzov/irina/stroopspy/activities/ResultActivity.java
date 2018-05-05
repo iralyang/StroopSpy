@@ -98,6 +98,7 @@ public class ResultActivity extends AppCompatActivity {
         bundle.putFloat(Statistics.AVERAGE_TIME, this.testingAverageTime);
         bundle.putFloat(Statistics.PERCENTAGE_CORRECT, this.testingPercentage);
         intent.putExtra(Statistics.BUNDLE_NAME, bundle);
+        finish();
         startActivity(intent);
     }
 }

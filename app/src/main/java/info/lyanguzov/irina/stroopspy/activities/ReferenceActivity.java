@@ -30,6 +30,7 @@ public class ReferenceActivity extends BasicActivity {
     protected void startNextActivity() {
         Intent intent = new Intent(this, InfoActivity.class);
         intent.putExtra(Statistics.BUNDLE_NAME, this.getStatistics().getResults());
+        finish();
         startActivity(intent);
     }
 }

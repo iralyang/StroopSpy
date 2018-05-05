@@ -23,6 +23,7 @@ public class FirstActivity extends AppCompatActivity {
     }
     public void start(View view) {
         Intent intent = new Intent(this, ReferenceActivity.class);
+        finish();
         startActivity(intent);
     }
 }
